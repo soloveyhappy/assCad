@@ -23,10 +23,12 @@ MainWindow::MainWindow()
 
     //QWidget* mainWidget = new QWidget ;
     text = new QTextEdit;
-    QString s = "Getting Started                         How to familiarize yourself with Qt Designer\
-                Launching Designer                  Running the Qt Designer application \
-                The User Interface                  How to interact with Qt Designer";
-    text->setText(s);
+    QString s = "Getting Started  \t How to familiarize yourself with Qt Designer\n"
+                "   Launching Designer   \t   Running the Qt Designer application\n"
+                "The User Interface  \t   How to interact with Qt Designer\n"
+                "   The User Interface   \t   How to interact with Qt Designer\n";
+
+    text->setPlainText(s);
 
 
     QPushButton* btn = new QPushButton("sdsd");
@@ -85,7 +87,12 @@ void MainWindow::clicked(bool)
     modelView->setModel(model);
     for (int column = 0; column < model->columnCount(); ++column)
             modelView->resizeColumnToContents(column);
+    modelView->resizeColumnToContents(0);
+    modelView->resizeColumnToContents(1);
+
+
     dataDoc->setWidget(modelView);
+    dataDoc->resize(modelView->size());
 
 }
 
