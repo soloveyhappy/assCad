@@ -1,9 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
+#include <QTextEdit>
+
+
+
+
+
+class QLabel;
 
 class MainWindow : public QMainWindow
 {
@@ -11,11 +15,16 @@ class MainWindow : public QMainWindow
 public:
     MainWindow();
     ~MainWindow();
-private:
 
+protected:
+    void mousePressEvent(QMouseEvent *);
 signals:
 
 public slots:
+    void clicked(bool);
+private:
+    QDockWidget* dataDoc;
+    QTextEdit* text;
 };
 
 #endif // MAINWINDOW_H
