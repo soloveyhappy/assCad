@@ -3,7 +3,7 @@
 TreeModel::TreeModel(const QString& data, QObject *parent)
     : QAbstractItemModel(parent)
 {
-    QList<QVariant> rootData;
+    QVector<QVariant> rootData;
     rootData << "Title" << "Summary";
     rootItem = new TreeItem(rootData);
     setupModelData(data.split(QString("\n")), rootItem);
@@ -101,8 +101,8 @@ QVariant TreeModel::headerData(int section, Qt::Orientation orientation,
 
 void TreeModel::setupModelData(const QStringList& lines, TreeItem* parent)
 {
-    QList<TreeItem*> parents;
-    QList<int> indentations;
+    QVector<TreeItem*> parents;
+    QVector<int> indentations;
     parents << parent;
     indentations << 0;
 
@@ -122,7 +122,7 @@ void TreeModel::setupModelData(const QStringList& lines, TreeItem* parent)
         if (!lineData.isEmpty()) {
             // Read the column data from the rest of the line.
             QStringList columnStrings = lineData.split("\t", QString::SkipEmptyParts);
-            QList<QVariant> columnData;
+            QVector<QVariant> columnData;
             for (int column = 0; column < columnStrings.count(); ++column)
                 columnData << columnStrings[column];
 

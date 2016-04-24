@@ -35,10 +35,13 @@ MainWindow::MainWindow()
     layout->addWidget(text);
     layout->addWidget(btn);
     QWidget* centralWidget = new QWidget;
+
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
     dataDoc = new QDockWidget( tr("Data"));
     addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, dataDoc);
+    setFixedSize(800, 600);
+
 
   //  QStatusBar* status = new QStatusBar;
 
@@ -80,6 +83,8 @@ void MainWindow::clicked(bool)
     TreeModel* model = new TreeModel(s);
     QTreeView* modelView = new QTreeView;
     modelView->setModel(model);
+    for (int column = 0; column < model->columnCount(); ++column)
+            modelView->resizeColumnToContents(column);
     dataDoc->setWidget(modelView);
 
 }
@@ -88,6 +93,6 @@ void MainWindow::mousePressEvent(QMouseEvent* mouseEvent)
 {
     QString s = QString("x:%1 - y:%2").arg(mouseEvent->localPos().x()).arg(mouseEvent->localPos().y());
     qDebug() << s;
-    mouseEvent->setAccepted(true);
+    mouseEvent->setAccepted(false);
 }
 
