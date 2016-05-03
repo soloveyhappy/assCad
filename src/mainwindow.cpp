@@ -1,72 +1,52 @@
 #include "mainwindow.h"
-#include <QWidget>
-#include <QDockWidget>
 #include <QStatusBar>
 #include <QLayout>
 #include <QMouseEvent>
-#include <QLabel>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QApplication>
-#include <QDockWidget>
-#include <QTreeView>
-#include <QTextEdit>
-#include <QTreeView>
 #include <QDebug>
-#include <QSplitter>
+#include <QVector>
+#include <QMenu>
+#include <QMenuBar>
 
 #include "treemodel.h"
+#include "treeitem.h"
+
+#define EMPTYLIST QVector<QVariant>()
 
 MainWindow::MainWindow()
 {
 
-    //QWidget* mainWidget = new QWidget ;
-    text = new QTextEdit;
-    QString s = "Getting Started  \t How to familiarize yourself with Qt Designer\n"
-                "   Launching Designer   \t   Running the Qt Designer application\n"
-                "The User Interface  \t   How to interact with Qt Designer\n"
-                "   The User Interface   \t   How to interact with Qt Designer\n";
+    m_mdiArea = new QMdiArea();
+    setCentralWidget(m_mdiArea);
+    m_dataDoc = new QDockWidget( tr("Data"));
+    m_treeView = new QTreeView;
+    m_dataDoc->setWidget(m_treeView);
+    addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, m_dataDoc);
+    resize(1024, 860);
+    m_dataDoc->raise();
 
-    text->setPlainText(s);
+    root = new TreeItem(QVector<QVariant>()<<"Name"<<"Info");
+    group1 = new TreeItem(QVector<QVariant>()<<"group1"<<"g1");
+    group2 = new TreeItem(QVector<QVariant>()<<"group2"<<"g2");
+    TreeItem* subgroup1 = new TreeItem(QVector<QVariant>()<<"subgroup1"<<"s1");
+    TreeItem* subgroup2 = new TreeItem(QVector<QVariant>()<<"subgroup2"<<"s1");
 
+    group2->appendChild(subgroup1);
+    group2->appendChild(subgroup2);
+    root->appendChild(group1);
+    root->appendChild(group2);
+    treeModel = new TreeModel(root);
 
-    QPushButton* btn = new QPushButton("sdsd");
-    connect(btn, SIGNAL(clicked(bool)), this, SLOT(clicked(bool)));
-    QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget(text);
-    layout->addWidget(btn);
-    QWidget* centralWidget = new QWidget;
+    m_treeView->setModel(treeModel);
+    m_treeView->resizeColumnToContents(0);
+    m_treeView->resizeColumnToContents(1);
 
-    centralWidget->setLayout(layout);
-    setCentralWidget(centralWidget);
-    dataDoc = new QDockWidget( tr("Data"));
-    addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, dataDoc);
-    setFixedSize(800, 600);
-
-
-  //  QStatusBar* status = new QStatusBar;
-
-//    QTreeView* dataTreeView = new QTreeView;
-
-
-
-//    QVBoxLayout* vertLayout = new QVBoxLayout;
-
-//    text = new QLabel("text");
-//    vertLayout->addWidget(text);
-
-//    QLabel* statusLabel = new QLabel("empty");
-//    status->addPermanentWidget(statusLabel);
-//    setStatusBar(status);
-
-//
-//
-//    vertLayout->addWidget(btn);
-
-    //mainWidget->setLayout(vertLayout);
-
-
+    QAction* action = new QAction("add", menuBar());
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(onAction(bool)));
+    menuBar()->addActions(QList<QAction*>() << action);
 }
 
 MainWindow::~MainWindow()
@@ -81,25 +61,23 @@ void MainWindow::clicked(bool)
                                                   Qt::MouseButton::LeftButton,
                                                   Qt::MouseButton::LeftButton,
                                                   Qt::KeyboardModifier::NoModifier ));
-    QString s = text->toPlainText();
-    TreeModel* model = new TreeModel(s);
-    QTreeView* modelView = new QTreeView;
-    modelView->setModel(model);
-    for (int column = 0; column < model->columnCount(); ++column)
-            modelView->resizeColumnToContents(column);
-    modelView->resizeColumnToContents(0);
-    modelView->resizeColumnToContents(1);
 
 
-    dataDoc->setWidget(modelView);
-    dataDoc->resize(modelView->size());
+}
+static int iter = 0;
+void MainWindow::onAction(bool)
+{
+    TreeItem* newItem = new TreeItem(EMPTYLIST << "NewItem" <<  QString::number(++iter));
+    //QModelIndex rootIndex = treeModel->index(0, 0);
+    QModelIndex group1Index = treeModel->index(0, 0);
+    treeModel->insertItem(newItem, group1Index);
 
+    //group1->appendChild(newItem);
+    //m_treeView->reset();
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* mouseEvent)
 {
-    QString s = QString("x:%1 - y:%2").arg(mouseEvent->localPos().x()).arg(mouseEvent->localPos().y());
-    qDebug() << s;
-    mouseEvent->setAccepted(false);
+
 }
 

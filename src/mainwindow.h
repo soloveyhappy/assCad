@@ -1,13 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+
 #include <QMainWindow>
-#include <QTextEdit>
-
-
-
-
+#include <QMdiArea>
+#include <QDockWidget>
+#include <QTreeView>
 
 class QLabel;
+class TreeModel;
+class TreeItem;
 
 class MainWindow : public QMainWindow
 {
@@ -17,14 +18,21 @@ public:
     ~MainWindow();
 
 protected:
-    void mousePressEvent(QMouseEvent *);
+    void mousePressEvent(QMouseEvent *) override;
 signals:
 
 public slots:
     void clicked(bool);
+private slots:
+    void onAction(bool);
 private:
-    QDockWidget* dataDoc;
-    QTextEdit* text;
+    QMdiArea* m_mdiArea;
+    QDockWidget* m_dataDoc;
+    QTreeView* m_treeView;
+    TreeModel* treeModel;
+    TreeItem* group1;
+    TreeItem* group2;
+    TreeItem* root;
 };
 
 #endif // MAINWINDOW_H

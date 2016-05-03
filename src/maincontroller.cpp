@@ -18,6 +18,5 @@ MainController::~MainController()
 void MainController::show()
 {
     m_window = new MainWindow;
-    m_window->installEventFilter(new MouseEventFilter);
     m_window->show();
 }
