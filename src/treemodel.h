@@ -44,6 +44,7 @@
 #include <QAbstractItemModel>
 #include <QModelIndex>
 #include <QVariant>
+#include <QMimeData>
 
 class TreeItem;
 
@@ -73,6 +74,7 @@ public:
                        const QVariant &value, int role = Qt::EditRole) Q_DECL_OVERRIDE;
 
     bool insertItem(TreeItem* newItem, const QModelIndex& parenIndex);
+    bool removeItem(TreeItem* newItem, const QModelIndex& parenIndex);
 
     bool insertColumns(int position, int columns,
                        const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
@@ -82,6 +84,15 @@ public:
                     const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
     bool removeRows(int position, int rows,
                     const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
+
+    Qt::DropActions supportedDropActions() const Q_DECL_OVERRIDE;
+
+    QStringList mimeTypes() const Q_DECL_OVERRIDE;
+
+    QMimeData *mimeData(const QModelIndexList &indexes) const Q_DECL_OVERRIDE;
+
+    bool dropMimeData(const QMimeData *data,
+        Qt::DropAction action, int row, int column, const QModelIndex &parent) Q_DECL_OVERRIDE;
 
 private:
     void setupModelData(const QStringList &lines, TreeItem *parent);

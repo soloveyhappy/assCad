@@ -40,6 +40,11 @@ MainWindow::MainWindow()
     root->appendChild(group2);
     treeModel = new TreeModel(root);
 
+    //m_treeView->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectItems);
+    m_treeView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    m_treeView->setDragEnabled(true);
+    m_treeView->setAcceptDrops(true);
+    m_treeView->setDropIndicatorShown(true);
     m_treeView->setModel(treeModel);
     m_treeView->resizeColumnToContents(0);
     m_treeView->resizeColumnToContents(1);

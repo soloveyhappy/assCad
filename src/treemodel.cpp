@@ -77,7 +77,7 @@ Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
     if (!index.isValid())
         return 0;
 
-    return /*Qt::ItemIsEditable |*/ QAbstractItemModel::flags(index);
+    return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | QAbstractItemModel::flags(index);
 }
 
 TreeItem *TreeModel::getItem(const QModelIndex &index) const
@@ -175,6 +175,54 @@ bool TreeModel::removeRows(int position, int rows, const QModelIndex &parent)
 
     return success;
 }
+
+Qt::DropActions TreeModel::supportedDropActions() const
+{
+    return Qt::CopyAction | Qt::MoveAction;
+}
+
+QStringList TreeModel::mimeTypes() const
+{
+    QStringList types;
+    types << "application/vnd.text.list";
+    return types;
+}
+
+QMimeData*TreeModel::mimeData(const QModelIndexList&indexes) const
+{
+    QMimeData *mimeData = new QMimeData();
+    QByteArray encodedData;
+
+    QDataStream stream(&encodedData, QIODevice::WriteOnly);
+
+    foreach (const QModelIndex &index, indexes)
+    {
+        if (index.isValid())
+        {
+            QString text = data(index, Qt::DisplayRole).toString();
+            stream << text;
+        }
+    }
+
+    mimeData->setData("application/vnd.text.list", encodedData);
+    return mimeData;
+}
+
+bool TreeModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent)
+{
+    if (action == Qt::IgnoreAction)
+        return true;
+
+    if (!data->hasFormat("application/vnd.text.list"))
+        return false;
+
+    if (column > 0)
+        return false;
+
+
+    return true;
+}
+
 
 int TreeModel::rowCount(const QModelIndex &parent) const
 {
