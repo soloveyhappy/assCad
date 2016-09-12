@@ -5,4 +5,5 @@ Just sample
 - https://github.com/marker68/simple-cluster
 - http://code.qt.io/cgit/qt/qt.git/tree/tests/auto/modeltest
 - http://doc.qt.io/qt-4.8/qabstractitemmodel.html
+
 - http://doc.qt.io/qt-4.8/qt-itemviews-puzzle-example.html
