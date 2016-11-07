@@ -6,3 +6,4 @@ http://snap.stanford.edu/
 http://www.codecommit.com/blog/java/understanding-and-applying-operational-transformation
 https://ru.scribd.com/document/4434820/SmartDraw-User-s-Guide
 https://code.google.com/archive/p/google-mobwrite/wikis
+http://rus-linux.net/MyLDP/BOOKS/Architecture-Open-Source-Applications/index.html
