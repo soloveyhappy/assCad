@@ -8,3 +8,4 @@ https://ru.scribd.com/document/4434820/SmartDraw-User-s-Guide
 https://code.google.com/archive/p/google-mobwrite/wikis
 http://rus-linux.net/MyLDP/BOOKS/Architecture-Open-Source-Applications/index.html
 https://github.com/aosabook/500lines
+http://programmingexamples.net/wiki/Boost/BGL
