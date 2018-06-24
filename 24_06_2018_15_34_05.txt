@@ -1,0 +1,32 @@
+{
+    "group1": {
+        "rules": [
+            {
+                "m": 5, 
+                "n": 3
+            }, 
+            {
+                "m": 6, 
+                "n": 2
+            }, 
+            {
+                "m": 7, 
+                "n": 1
+            }
+        ], 
+        "free_tickets": {
+            "addrM": 2
+        }
+    }, 
+    "group2": {
+        "rules": [
+            {
+                "m": 7, 
+                "n": 1
+            }
+        ], 
+        "free_tickets": {
+            "addrM": 1
+        }
+    }
+}
