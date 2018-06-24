@@ -1,0 +1,2 @@
+group1;addrM;2
+group2;addrM;1
