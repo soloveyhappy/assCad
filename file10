@@ -1,0 +1,21 @@
+{
+  "lottery_db": {
+    "DSN": "host=localhost port=5432 dbname=LotteryDb user=solo password=ssdd connect_timeout=60"
+  },
+  "database": {
+    "DSN": ""
+  },
+  "github": {
+    "username": "soloveyhappy",
+    "password": "Ssddolo1987",
+    "repository": "assCad"
+  },
+  "nem": {
+    "host": "127.0.0.1",
+    "port": 7890,
+    "privatekey": "631ac1a9da95950ab70fd7f4b95d2140227707ffe37e810e055b67426bb5aae4",
+    "publickey": "9ff92d9b9cfa2eda9efdd75b6e5ad3519aea5d64551a993d6ff42540b0f92c06",
+    "address": "TCFMRBHPM5QRBQXMOIOAZN6MES6TC2MVGJRKMCID",
+    "deadline": 3600
+  }
+}
