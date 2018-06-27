@@ -1,0 +1,12 @@
+{
+    "loyalty": "group2",
+    "free_tickets": {
+        "addrM": 1
+    },
+    "rules": [
+        [
+            1,
+            7
+        ]
+    ]
+}
