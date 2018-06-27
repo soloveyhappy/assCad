@@ -1,0 +1,20 @@
+#! /usr/bin/python
+
+import logic
+from time import sleep
+
+# import os, sys
+
+# print(os.path.join(os.path.dirname(sys.argv[0]), os.pardir, "var", "log", "free-tickets-nem.log"))
+
+
+def main():
+    while True:
+        logic.process()
+        sleep(10.00)
+
+
+if __name__ == "__main__":
+    main()
+
+
