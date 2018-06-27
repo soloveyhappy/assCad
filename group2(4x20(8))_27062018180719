@@ -1,0 +1,10 @@
+{
+    "loyalty": "group2",
+    "rules": [
+        [
+            1,
+            7
+        ]
+    ],
+    "free_tickets": {}
+}
