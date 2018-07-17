@@ -1,0 +1,7 @@
+import github_wrapper
+
+with open('test_git.py', 'r') as sfile:
+    content = sfile.read()
+
+result = github_wrapper.send_file("/test1", "my comment", content)
+print("commit.sha =", result)
