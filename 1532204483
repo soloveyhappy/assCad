@@ -1,0 +1,9 @@
+[
+  {
+    "lotteries": "4x20(1),5x36(1),6x42(1)",
+    "loyalty": "Lottery_4x20",
+    "tickets": {
+      "0xc4a517ddade7eb38ae3522cabcdf02e1f3c11021": 1
+    }
+  }
+]
